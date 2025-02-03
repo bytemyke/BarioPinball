@@ -9,69 +9,47 @@ export function createMap(scene, screenWidth, screenHeight) {
 }
 
 function createJSON(screenWidth, screenHeight) {
-  const wallWidth = screenWidth / 60 / 2;
+  const wallWidth = 4;
   const startingX = wallWidth * 1.1;
   const startingY = screenHeight - screenHeight / 80;
+  console.log(startingX + screenWidth / 4.5)
   const JSONMap = {
     walls: [
       {
-        x: startingX + screenWidth / 4.5,
-        y: startingY - screenHeight / 3.8,
+        x: 71,
+        y: 505,
         width: wallWidth,
-        height: screenHeight / 6,
+        height: 67,
         rotation: 0,
         color: 0x0000ff,
       },
       {
-        x: screenWidth - (startingX + screenWidth / 4.5),
-        y: startingY - screenHeight / 3.8,
+        x: screenWidth - 71 ,
+        y: 505,
         width: wallWidth,
-        height: screenHeight / 6,
+        height: 67,
         rotation: 0,
         color: 0x0000ff,
       },
       {
-        x: startingX + screenWidth / 4.5 + screenWidth / 20,
-        y: startingY - screenHeight / 4.5 + screenHeight / 6 / 2.65,
+        x: 92,
+        y: 510 + 45,
         width: wallWidth,
-        height: screenHeight / 6 / 2,
-        rotation: 200,
+        height: 60,
+        rotation: 40,
         color: 0x0000ff,
       },
       {
-        x: screenWidth - (startingX + screenWidth / 4.5) - screenWidth / 20,
-        y: startingY - screenHeight / 4.5 + screenHeight / 6 / 2.65,
+        x: screenWidth - 92 ,
+        y: 510 + 45,
         width: wallWidth,
-        height: screenHeight / 6 / 2,
-        rotation: -200,
+        height: 60,
+        rotation: -40,
         color: 0x0000ff,
-      },
-
-      {
-        x: startingX + wallWidth * 12,
-        y: startingY - screenHeight / 4.5 + screenHeight / 6 / 2.65,
-        width: wallWidth,
-        height: screenHeight / 4,
-        rotation: 200,
-        color: 0x0000ff,
-      },
-      {
-        x: screenWidth - (startingX + screenWidth / 4.5) + screenWidth / 20,
-        y: startingY - screenHeight / 4.5 + screenHeight / 6 / 2.65,
-        width: wallWidth,
-        height: screenHeight / 6 / 2,
-        rotation: 200,
-        color: 0x0000ff,
-      },
-      //left wall
-      {
-        x: startingX,
-        y: screenHeight / 2,
-        width: wallWidth,
-        height: screenHeight,
-        rotation: 0,
-        color: 0x0000ff,
-      },
+      }
+      
+      
+     
     ],
     bumpers: [],
   };

@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 export class Ball extends Phaser.Physics.Matter.Image {
-  constructor(scene, x, y, scale, texture) {
+  constructor(scene, x, y, texture) {
     super(scene.matter.world, x, y, texture);
     this.setBody({
       type: "circle",
@@ -12,7 +12,7 @@ export class Ball extends Phaser.Physics.Matter.Image {
     this.setBounce(1);
     this.setFriction(0, 0, 0);
     this.setDepth(1);
-    this.setScale(scale);
+    this.setScale(.2);
     this.scene.sys.displayList.add(this);
   }
 }

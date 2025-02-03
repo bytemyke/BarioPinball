@@ -10,8 +10,8 @@ export class Flipper {
     this.Y = y;
     this.orientation = orientation;
     this.orientation == "left" ? (this.LEVER = 64) : (this.LEVER = 64);
-    this.width = scene.cameras.main.centerX / 3;
-    this.height = scene.cameras.main.centerY / 25;
+    this.width = 62;
+    this.height = 10;
 
     var STIFFNESS = 0.1;
     this.MIN = Phaser.Math.DegToRad(32);

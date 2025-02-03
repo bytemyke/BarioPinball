@@ -37,20 +37,17 @@ export class Game extends Scene {
     this.collisionGroupE = this.matter.world.nextCategory();
     this.leftFlipper = new LeftFlipper(
       this,
-      CENTER.x - CENTER.x / 3,
-      height - height / 8,
-
+      119 ,
+      583.625,
       "flipper"
     );
     this.rightFlipper = new RightFlipper(
       this,
-      CENTER.x + CENTER.x / 3,
-      height - height / 8,
+      238,
+      583.625,
       "flipper"
     );
-    const ballScale = (height + CENTER.x) / 3459;
-    console.log(ballScale);
-    this.ball = new Ball(this, 200, 50, ballScale, "ball");
+    this.ball = new Ball(this, 200, 50, "ball");
     this.Slingshot = new Slingshot(this, width, height);
 
     // this.slingshot = new Slingshot(
