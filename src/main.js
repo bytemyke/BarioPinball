@@ -10,11 +10,12 @@ import { Preloader } from "./scenes/Preloader";
 const vh = window.innerHeight * 0.9;
 const config = {
   type: Phaser.AUTO,
-  width: "357",
-  height: "667",
+  width: "368",
+  height: "672",
   parent: "game-container",
   backgroundColor: "#028af8",
   canvasStyle: "border: 5px solid white; border-radius: 10px;",
+  resolution: 10, // the higher the better (but certainly slower)
   max: {
     width: 800,
     height: vh,
@@ -25,7 +26,7 @@ const config = {
   },
   scene: [
     // Boot,
-    // Preloader,
+    Preloader,
     // MainMenu,
     Game,
     GameOver,

@@ -1,3 +1,4 @@
+//Main color : #0C00FE 
 import { Wall } from "../components/Wall";
 export function createMap(scene, screenWidth, screenHeight) {
   console.log("creating walls");
@@ -12,42 +13,58 @@ function createJSON(screenWidth, screenHeight) {
   const wallWidth = 4;
   const startingX = wallWidth * 1.1;
   const startingY = screenHeight - screenHeight / 80;
+  const wallColor = 0x060088;
   console.log(startingX + screenWidth / 4.5)
   const JSONMap = {
     walls: [
       {
-        x: 71,
+        x: 52,
         y: 505,
         width: wallWidth,
         height: 67,
         rotation: 0,
-        color: 0x0000ff,
+        color: wallColor,
       },
       {
-        x: screenWidth - 71 ,
+        x: screenWidth - 91,
         y: 505,
         width: wallWidth,
         height: 67,
         rotation: 0,
-        color: 0x0000ff,
+        color: wallColor,
       },
       {
-        x: 92,
-        y: 510 + 45,
+        x: 77,
+        y: 510 + 50,
         width: wallWidth,
-        height: 60,
+        height: 65,
         rotation: 40,
-        color: 0x0000ff,
+        color: wallColor,
       },
       {
-        x: screenWidth - 92 ,
-        y: 510 + 45,
+        x: screenWidth - 117 ,
+        y: 510 + 50,
         width: wallWidth,
-        height: 60,
+        height: 65,
         rotation: -40,
-        color: 0x0000ff,
+        color: wallColor,
+      },
+      {
+        x: 82,
+        y: 510 + 110,
+        width: wallWidth,
+        height: 100,
+        rotation: 40,
+        color: wallColor,
+      },
+      {
+        x: screenWidth - 92,
+        y: 510 + 110,
+        width: wallWidth,
+        height: 100,
+        rotation: -40,
+        color: wallColor,
       }
-      
       
      
     ],

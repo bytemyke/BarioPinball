@@ -1,53 +1,8 @@
 export class Slingshot {
   constructor(scene, screenWidth, screenHeight) {
     const ballWidth = scene.ball.displayWidth;
-    const slingshotWidth = scene.rightFlipper.width / 8;
-    const spaceBetween = ballWidth + slingshotWidth;
-    console.log(slingshotWidth);
-    this.scene = scene;
-    this.x = 0;
-    this.y = 0;
-    console.log(screenHeight);
-    this.wallOne = scene.matter.add.gameObject(
-      scene.add.rectangle(
-        screenWidth,
-        screenHeight / 2,
-        slingshotWidth,
-        screenHeight,
-        0x0000ff
-      ),
-      {
-        friction: 1,
-        isStatic: true,
-      }
-    );
-    this.wallTwo = scene.matter.add.gameObject(
-      scene.add.rectangle(
-        screenWidth - spaceBetween,
-        screenHeight / 2,
-        slingshotWidth,
-        screenHeight,
-        0x0000ff
-      ),
-      {
-        friction: 1,
-        isStatic: true,
-      }
-    );
-
-    this.sling = scene.matter.add.gameObject(
-      scene.add.rectangle(
-        screenWidth - spaceBetween / 2,
-        screenHeight,
-        spaceBetween,
-        screenHeight,
-        0x91c520
-      ),
-      {
-        friction: 1,
-        isStatic: true,
-      }
-    );
+    const slingshotWidth = 16;
+   
   }
 
   fire(sound) {

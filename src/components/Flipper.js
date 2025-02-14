@@ -9,7 +9,7 @@ export class Flipper {
     this.X = x;
     this.Y = y;
     this.orientation = orientation;
-    this.orientation == "left" ? (this.LEVER = 64) : (this.LEVER = 64);
+    this.LEVER = 62;
     this.width = 62;
     this.height = 10;
 
@@ -34,7 +34,7 @@ export class Flipper {
       this.Y,
       this.width,
       this.height,
-      0x0000ff
+      0x0C00FE
     );
 
     scene.add.existing(rectangle);
