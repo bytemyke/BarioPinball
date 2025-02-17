@@ -36,19 +36,16 @@ export class Game extends Scene {
       tileset,
       0,
       0
-    )    
+    );
     // wallLayer.setCollisionByProperty({ collides: true });
-    wallLayer.setCollisionByExclusion([ -1, 0 ]);
-    ceilingLayer.setCollisionByExclusion([ -1, 0 ]);
-    groundLayer.setCollisionByExclusion([ -1, 0 ]);
-
+    wallLayer.setCollisionByExclusion([-1, 0]);
+    ceilingLayer.setCollisionByExclusion([-1, 0]);
+    groundLayer.setCollisionByExclusion([-1, 0]);
     this.matter.world.convertTilemapLayer(wallLayer);
     this.matter.world.convertTilemapLayer(groundLayer);
     this.matter.world.convertTilemapLayer(ceilingLayer);
 
-
     // map.createLayer("Pipe", tileset);
-    this.matter.world.setBounds();
     let { width, height } = this.sys.game.canvas;
     const CENTER = {
       x: this.cameras.main.centerX,
@@ -64,13 +61,12 @@ export class Game extends Scene {
     this.leftFlipper = new LeftFlipper(this, 119 - 18, 583.625, "flipper");
     this.rightFlipper = new RightFlipper(this, 238 - 20, 583.625, "flipper");
     this.ball = new Ball(this, 200, 50, "ball");
-    this.Slingshot = new Slingshot(this, width, height);
+    this.slingShot = new Slingshot(this, width, height, slingshotPipe);
 
-    // this.slingshot = new Slingshot(
-    //   this
-    // )
     this.createInputs();
     createMap(this, width, height);
+    this.createCollision();
+    this.matter.world.setBounds();
   }
 
   update() {}
@@ -90,5 +86,53 @@ export class Game extends Scene {
     keyObject.on("up", function (event) {
       scene.rightFlipper.flip(false);
     });
+  }
+  /**
+   * Sets up collision handling for the game using Matter.js physics.
+   * This function listens for collision start events in the Matter.js world.
+   * When a ball collides with a dangerous tile, it initiates a tween effect
+   * to fade out and remove the ball from the world. It ensures each ball is
+   * processed only once per collision event by setting an isBeingDestroyed flag.
+   */
+
+  createCollision() {
+    this.matter.world.on(
+      "collisionstart",
+      function (event) {
+        for (let i = 0; i < event.pairs.length; i++) {
+          // The tile bodies in this example are a mixture of compound bodies and simple rectangle
+          // bodies. The "label" property was set on the parent body, so we will first make sure
+          // that we have the top level body instead of a part of a larger compound body.
+          const bodyA = event.pairs[i].bodyA;
+          const bodyB = event.pairs[i].bodyB;
+          if (
+            ((bodyA.label === "ball" && bodyB.label === "slingshotTile") ||
+              (bodyB.label === "ball" && bodyA.label === "slingshotTile")) &&
+            !this.slingShot.isCharging
+          ) {
+            const ballBody = bodyA.label === "ball" ? bodyA : bodyB;
+            const ball = ballBody.gameObject;
+            ball.setVelocity(0, 0);
+            this.slingShot.fire();
+            // A body may collide with multiple other bodies in a step, so we'll use a flag to
+            // only tween & destroy the ball once.
+            // if (ball.isBeingDestroyed) {
+            //   continue;
+            // }
+            // ball.isBeingDestroyed = true;
+            // this.matter.world.remove(ballBody);
+
+            // this.tweens.add({
+            //   targets: ball,
+            //   alpha: { value: 0, duration: 150, ease: "Power1" },
+            //   onComplete: ((ball) => {
+            //     ball.destroy();
+            //   }).bind(this, ball),
+            // });
+          }
+        }
+      },
+      this
+    );
   }
 }
