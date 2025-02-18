@@ -135,4 +135,7 @@ export class Game extends Scene {
       this
     );
   }
+   rand(min, max) {
+		return Math.random() * (max - min) + min;
+	}
 }

@@ -22,10 +22,16 @@ export class Slingshot {
 
   charge() {
     this.isCharging = true;
+    setTimeout(() => {
+      this.release();
+    }, 100);
   }
 
   release() {
-    this.constraint.stiffness = 0.0001;
+    // this.constraint.stiffness = 0.0001;
     this.isCharging = false;
+    // this.scene.matter.body.setPosition(this.scene.ball, { x: 465, y: 765 });
+		this.scene.ball.setVelocity(0,-25 + this.scene.rand(-2, 2) );
+		this.scene.matter.body.setAngularVelocity(this.scene.ball, 0);
   }
 }
