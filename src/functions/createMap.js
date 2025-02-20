@@ -1,12 +1,20 @@
 //Main color : #0C00FE
 import { Wall } from "../components/Wall";
 export function createMap(scene, screenWidth, screenHeight) {
+  // create dual map elements
   console.log("creating walls");
   scene.walls = scene.add.group();
   const map = createJSON(screenWidth, screenHeight);
   map.walls.forEach((wall) => {
     scene.walls.add(new Wall(scene, wall).body);
   });
+
+  //if castle
+  if (scene.world === "Castle") {
+    createCastleCollisions(scene);
+    return;
+  }
+  //if outside
 }
 
 function createJSON(screenWidth, screenHeight) {
@@ -87,4 +95,36 @@ function createJSON(screenWidth, screenHeight) {
     bumpers: [],
   };
   return JSONMap;
+}
+
+/**
+ * Sets up collision detection for the castle scene.
+ * Listens for collisions between the ball and slingshot tiles.
+ * If a collision is detected and the slingshot is not charging,
+ * it stops the ball's movement and fires the slingshot.
+ *
+ * @param {Phaser.Scene} scene - The current scene instance where collisions are being handled.
+ */
+function createCastleCollisions(scene) {
+  console.log("creating castle collisions");
+  scene.matter.world.on(
+    "collisionstart",
+    function (event) {
+      for (let i = 0; i < event.pairs.length; i++) {
+        const bodyA = event.pairs[i].bodyA;
+        const bodyB = event.pairs[i].bodyB;
+        if (
+          ((bodyA.label === "ball" && bodyB.label === "slingshotTile") ||
+            (bodyB.label === "ball" && bodyA.label === "slingshotTile")) &&
+          !scene.slingShot.isCharging
+        ) {
+          const ballBody = bodyA.label === "ball" ? bodyA : bodyB;
+          const ball = ballBody.gameObject;
+          ball.setVelocity(0, 0);
+          scene.slingShot.fire();
+        }
+      }
+    },
+    scene
+  );
 }
